@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tasks
+      author: bekzat aitymov
+      changes:
+        - createTable:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: header
+                  type: VARCHAR(100)
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: author_id
+                  type: integer
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_tasks_users
+                    references: users(id)
+              - column:
+                  name: isCompleted
+                  type: boolean
+              - column:
+                  name: timestamp
+                  type: timestamp
+
+
+
