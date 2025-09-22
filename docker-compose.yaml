@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: task-tracker-backend/Dockerfile
+    image: bekzatmv/task-tracker-backend:latest
     depends_on:
       db:
         condition: service_healthy
@@ -28,6 +29,7 @@ services:
     build:
       context: .
       dockerfile: scheduler/Dockerfile
+    image: bekzatmv/task-tracker-scheduler:latest
     depends_on:
       db:
         condition: service_healthy
@@ -52,6 +54,7 @@ services:
     build:
       context: .
       dockerfile: email-sender/Dockerfile
+    image: bekzatmv/task-tracker-email-sender:latest
     depends_on:
       broker1:
         condition: service_started
