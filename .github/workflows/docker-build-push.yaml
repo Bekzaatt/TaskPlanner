@@ -31,7 +31,7 @@ jobs:
     - name: Build and push email-sender image
       uses: docker/build-push-action@v5
       with:
-        context: ./email-sender
+        context: .
         file: ./email-sender/Dockerfile
         push: true
         tags: bekzatmv/task-tracker-email-sender:latest
@@ -39,7 +39,7 @@ jobs:
     - name: Build and push scheduler image
       uses: docker/build-push-action@v5
       with:
-        context: ./scheduler
+        context: .
         file: ./scheduler/Dockerfile
         push: true
         tags: bekzatmv/task-tracker-scheduler:latest
