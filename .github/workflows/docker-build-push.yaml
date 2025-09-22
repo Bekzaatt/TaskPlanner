@@ -1,0 +1,45 @@
+name: Build & Push Docker Images
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Sign in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push backend image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./task-tracker-backend/Dockerfile
+        push: true
+        tags: bekzatmv/task-tracker-backend:latest
+
+    - name: Build and push email-sender image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./email-sender/Dockerfile
+        push: true
+        tags: bekzatmv/task-tracker-email-sender:latest
+
+    - name: Build and push scheduler image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./scheduler/Dockerfile
+        push: true
+        tags: bekzatmv/task-tracker-scheduler:latest

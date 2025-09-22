@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-roles
+      author: bekzat aitymov
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: text
+                  constraints:
+                    nullable: false
